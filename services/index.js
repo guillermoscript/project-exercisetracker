@@ -41,7 +41,7 @@ async function getUserLogs(req, res) {
             return {
                 description: log.description,
                 duration: log.duration,
-                date: log.date
+                date: new Date(log.date).toDateString()
             }
         })
     })
@@ -101,11 +101,11 @@ async function createExercise(req, res) {
     })
 
     return res.status(201).json({
-        _id,
         username: userExist.username,
-        date: newExercise.date,
+        description: newExercise.description,
         duration: newExercise.duration,
-        description: newExercise.description
+        date: newExercise.date,
+        _id,
     })
 }
 

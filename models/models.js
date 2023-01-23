@@ -24,6 +24,10 @@ const exerciseSchema = mongoose.Schema({
         validate: (value) => {
             return types.isDate(value)
         }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 

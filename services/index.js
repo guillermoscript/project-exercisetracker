@@ -37,8 +37,13 @@ async function getUserLogs(req, res) {
         _id,
         username: userExist.username,
         count: userLogs.length,
-        log: userLogs
-
+        log: userLogs.map(log => {
+            return {
+                description: log.description,
+                duration: log.duration,
+                date: log.date
+            }
+        })
     })
 }
 
@@ -90,12 +95,18 @@ async function createExercise(req, res) {
 
     const newExercise = await exercise.create({
         description,
-        duration,
-        date: date.toDateString(),
+        duration: Number(duration),
+        date: date,
         user: _id
     })
 
-    return res.status(201).json(newExercise)
+    return res.status(201).json({
+        _id,
+        username: userExist.username,
+        date: newExercise.date,
+        duration: newExercise.duration,
+        description: newExercise.description
+    })
 }
 
 module.exports = {

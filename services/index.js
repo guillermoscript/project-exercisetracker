@@ -16,6 +16,7 @@ async function getUsers(req, res) {
 async function getUserLogs(req, res) {
 
     const { _id } = req.params;
+    const { from, to, limit } = req.query;
 
     const userExist = await user.findOne({ _id })
 
@@ -33,6 +34,22 @@ async function getUserLogs(req, res) {
         })
     }
 
+    if (from) {
+        userLogs = userLogs.filter(log => {
+            return new Date(log.date) >= new Date(from)
+        })
+    }
+
+    if (to) {
+        userLogs = userLogs.filter(log => {
+            return new Date(log.date) <= new Date(to)
+        })
+    }
+
+    if (limit) {
+        userLogs = userLogs.slice(0, limit)
+    }
+    
     return res.json({
         _id,
         username: userExist.username,
@@ -104,7 +121,7 @@ async function createExercise(req, res) {
         username: userExist.username,
         description: newExercise.description,
         duration: newExercise.duration,
-        date: newExercise.date,
+        date: new Date(newExercise.date).toDateString(),
         _id,
     })
 }

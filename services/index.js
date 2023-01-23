@@ -26,28 +26,76 @@ async function getUserLogs(req, res) {
         })
     }
 
+    if (from && to) {
+        const userLogs = await exercise.find({ user: _id, date: { $gte: new Date(from), $lte: new Date(to) } }).limit(Number(limit))
+        return res.json({
+            _id,
+            username: userExist.username,
+            count: userLogs.length,
+            log: userLogs.map(log => {
+                return {
+                    description: log.description,
+                    duration: log.duration,
+                    date: new Date(log.date).toDateString()
+                }
+            })
+        })
+    }
+
+    if (from) {
+        const userLogs = await exercise.find({ user: _id, date: { $gte: new Date(from) } }).limit(Number(limit))
+        return res.json({
+            _id,
+            username: userExist.username,
+            count: userLogs.length,
+            log: userLogs.map(log => {
+                return {
+                    description: log.description,
+                    duration: log.duration,
+                    date: new Date(log.date).toDateString()
+                }
+            })
+        })
+    }
+
+    if (to) {
+        const userLogs = await exercise.find({ user: _id, date: { $lte: new Date(to) } }).limit(Number(limit))
+        return res.json({
+            _id,
+            username: userExist.username,
+            count: userLogs.length,
+            log: userLogs.map(log => {
+                return {
+                    description: log.description,
+                    duration: log.duration,
+                    date: new Date(log.date).toDateString()
+                }
+            })
+        })
+    }
+
+    if (limit) {
+        const userLogs = await exercise.find({ user: _id }).limit(Number(limit))
+        return res.json({
+            _id,
+            username: userExist.username,
+            count: userLogs.length,
+            log: userLogs.map(log => {
+                return {
+                    description: log.description,
+                    duration: log.duration,
+                    date: new Date(log.date).toDateString()
+                }
+            })
+        })
+    }
+    
     const userLogs = await exercise.find({ user: _id })
 
     if (!userLogs) {
         return res.status(400).json({
             error: 'No logs found'
         })
-    }
-
-    if (from) {
-        userLogs = userLogs.filter(log => {
-            return new Date(log.date) >= new Date(from)
-        })
-    }
-
-    if (to) {
-        userLogs = userLogs.filter(log => {
-            return new Date(log.date) <= new Date(to)
-        })
-    }
-
-    if (limit) {
-        userLogs = userLogs.slice(0, limit)
     }
     
     return res.json({

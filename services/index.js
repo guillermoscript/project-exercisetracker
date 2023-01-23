@@ -36,7 +36,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toDateString()
+                    date: new Date(log.date).toLocaleDateString()
                 }
             })
         })
@@ -52,7 +52,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toDateString()
+                    date: new Date(log.date).toLocaleDateString()
                 }
             })
         })
@@ -68,7 +68,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toDateString()
+                    date: new Date(log.date).toLocaleDateString()
                 }
             })
         })
@@ -84,7 +84,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toDateString()
+                    date: new Date(log.date).toLocaleDateString()
                 }
             })
         })
@@ -106,7 +106,7 @@ async function getUserLogs(req, res) {
             return {
                 description: log.description,
                 duration: log.duration,
-                date: new Date(log.date).toDateString()
+                date: new Date(log.date).toLocaleDateString()
             }
         })
     })

@@ -36,7 +36,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toLocaleDateString()
+                    date: new Date(log.date).toDateString()
                 }
             })
         })
@@ -52,7 +52,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toLocaleDateString()
+                    date: new Date(log.date).toDateString()
                 }
             })
         })
@@ -68,7 +68,7 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toLocaleDateString()
+                    date: new Date(log.date).toDateString()
                 }
             })
         })
@@ -84,12 +84,12 @@ async function getUserLogs(req, res) {
                 return {
                     description: log.description,
                     duration: log.duration,
-                    date: new Date(log.date).toLocaleDateString()
+                    date: new Date(log.date).toDateString()
                 }
             })
         })
     }
-    
+
     const userLogs = await exercise.find({ user: _id })
 
     if (!userLogs) {
@@ -106,7 +106,7 @@ async function getUserLogs(req, res) {
             return {
                 description: log.description,
                 duration: log.duration,
-                date: new Date(log.date).toLocaleDateString()
+                date: new Date(log.date).toDateString()
             }
         })
     })
